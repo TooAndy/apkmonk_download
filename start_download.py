@@ -26,12 +26,12 @@ def start_loop(loop):
 
 async def async_download(name, url):
     print('Start wget %s...' % name)
-    name = name+".apk"
+    name = name + ".apk"
     dir = "download_apks/" + name.split(".")[1][0]
     try:
         if not os.path.isdir(dir):
             os.mkdir(dir)
-        if os.path.isfile(dir+"/"+name):
+        if os.path.isfile(dir + "/" + name):
             print("Already exists %s" % name)
             return
         command = 'proxychains wget "%s" -O %s/%s.pkg' % (url, dir, name)
