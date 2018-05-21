@@ -32,7 +32,9 @@ async def async_download(name, url):
         if not os.path.isdir(dir):
             os.mkdir(dir)
         if os.path.isfile(dir + "/" + name):
-            print("Already exists %s" % name)
+            print("\n-----------------------------------------------\n"
+                  "Already exists %s" % name +
+                  "\n-----------------------------------------------\n")
             return
         command = 'proxychains wget "%s" -O %s/%s.pkg' % (url, dir, name)
 
