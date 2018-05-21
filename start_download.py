@@ -36,7 +36,7 @@ async def async_download(name, url):
                   "Already exists %s" % name +
                   "\n-----------------------------------------------\n")
             return
-        command = 'proxychains wget "%s" -O %s/%s.pkg' % (url, dir, name)
+        command = 'proxychains wget "%s" -O %s/%s' % (url, dir, name)
 
         dl = await asyncio.create_subprocess_shell(command)
         await dl.wait()
