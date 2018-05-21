@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 import json
-
+import redis
 import scrapy
 from urllib.parse import urljoin
-
 from apks.items import ApksItem
-import redis
 
 
 class ApkmonkSpider(scrapy.Spider):
@@ -14,7 +12,6 @@ class ApkmonkSpider(scrapy.Spider):
     start_urls = ['https://www.apkmonk.com/category/action/1/']
     base_url = 'https://www.apkmonk.com/category/action/{0}/'
     current_page = 1
-    # loop = asyncio.get_event_loop()
     pool = redis.ConnectionPool(host='localhost', port=6379, decode_responses=True)
     r = redis.Redis(connection_pool=pool)
 
@@ -40,11 +37,6 @@ class ApkmonkSpider(scrapy.Spider):
         }
         yield scrapy.Request(json_url, meta=meta, callback=self.getDownloadJs)
 
-    # name = scrapy.Field()
-    # click_url = scrapy.Field()
-    # json_url = scrapy.Field()
-    # download_url = scrapy.Field()
-
     def getDownloadJs(self, response):
         re_json = json.loads(response.text)
         try:
@@ -60,18 +52,5 @@ class ApkmonkSpider(scrapy.Spider):
             value = name + "," + download_url
             self.r.lpush("apks", value)
             yield item
-
-            # dir = name.split(".")[1][0]
-            # self.logger.info("".join(['proxychains', ' wget', ' -nH', " %s" % download_url, ' -O', " %s/%s.apk" % (dir, name)]))
-
-
-            # task = [async_download(name, download_url)]
-
-            # self.loop.run_until_complete(asyncio.wait(task))
-            # self.loop.close()
-            # subprocess.call(['proxychains', 'wget', '-nH', "%s" % download_url, '-O', "%s/%s.apk" % (dir, name)])
-
-            # download(name, download_url)
-            # asyncDownload(name, download_url)
         except Exception as e:
             print(e)

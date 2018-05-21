@@ -27,7 +27,7 @@ CONCURRENT_REQUESTS = 4
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 7
+DOWNLOAD_DELAY = 1
 # The download delay setting will honor only one of:
 # CONCURRENT_REQUESTS_PER_DOMAIN = 16
 # CONCURRENT_REQUESTS_PER_IP = 16
@@ -54,11 +54,8 @@ DEFAULT_REQUEST_HEADERS = {
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-    # 'apks.middlewares.FrameMiddleware': 1,
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
     'scrapy_fake_useragent.middleware.RandomUserAgentMiddleware': 100,
-    # 'apks.middlewares.MyproxiesSpiderMiddleware': 200,
-    # 'apks.middlewares.MyRetryMiddleware': 300
 }
 
 # Enable or disable extensions
@@ -75,10 +72,10 @@ ITEM_PIPELINES = {
     # 'apks.pipelines.CustomPipeline': 2,
 }
 
-FILES_STORE = "download_apks"  # download directory
-DOWNLOAD_MAXSIZE = 10000000000  # MaxSize of file
-DOWNLOAD_WARNSIZE = 200000000  # WarnSize of file
-DOWNLOAD_TIMEOUT = 60 * 40
+# FILES_STORE = "download_apks"  # download directory
+# DOWNLOAD_MAXSIZE = 10000000000  # MaxSize of file
+# DOWNLOAD_WARNSIZE = 200000000  # WarnSize of file
+# DOWNLOAD_TIMEOUT = 60 * 40
 # FILES_URLS_FIELD = "url"
 # FILES_RESULT_FIELD = "name"
 # Enable and configure the AutoThrottle extension (disabled by default)
