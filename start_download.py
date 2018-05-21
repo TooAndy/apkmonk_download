@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 import asyncio
+import logging
 import os
 import time
 import redis
@@ -24,29 +25,30 @@ def start_loop(loop):
     loop.run_forever()
 
 
-async def async_download(name, url):
-    print('Start wget %s...' % name)
+async def async_download(logger, name, url):
+    logger.info('Start wget %s...' % name)
+    # print('Start wget %s...' % name)
     name = name + ".apk"
     dir = "download_apks/" + name.split(".")[1][0]
     try:
         if not os.path.isdir(dir):
             os.mkdir(dir)
         if os.path.isfile(dir + "/" + name):
-            print("\n-----------------------------------------------\n"
-                  "Already exists %s" % name +
-                  "\n-----------------------------------------------\n")
+            logger.info("\n-----------------------------------------------\n"
+                        "Already exists %s" % name +
+                        "\n-----------------------------------------------\n")
             return
-        command = 'proxychains wget "%s" -O %s/%s' % (url, dir, name)
+        command = 'wget "%s" -O %s/%s > /dev/null' % (url, dir, name)
 
         dl = await asyncio.create_subprocess_shell(command)
         await dl.wait()
-        print('Complete wget %s...' % name)
+        logger.info('Complete wget %s...' % name)
     except Exception as e:
         print(e)
 
 
 if __name__ == '__main__':
-
+    logger = logging.Logger(__name__)
     if not os.path.isdir("download_apks"):
         os.mkdir("download_apks")
     rcon = get_redis()
@@ -61,10 +63,9 @@ if __name__ == '__main__':
 
             if not value:
                 time.sleep(1)
-                print('.', end="")
                 continue
             name, url = value.split(",")
-            asyncio.run_coroutine_threadsafe(async_download(name, url), new_loop)
+            asyncio.run_coroutine_threadsafe(async_download(logger, name, url), new_loop)
     except Exception as e:
         print(e)
         new_loop.stop()
