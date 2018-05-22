@@ -16,11 +16,11 @@ scrapy在这里仅仅获取apk的真实url, 并把url放到redis队列中(使用
     redis-server
 
 ### 4. 运行Scrapy
-#### 如果在CLI中运行,执行:
+##### 如果在CLI中运行,执行:
     1. python start_download.py
     2. scrapy crawl apkmonk
 
-#### 如果导入IDE运行,执行
+##### 如果导入IDE运行,执行
     1. start_download.py
     2. start_scrapy.py
 
