@@ -34,7 +34,6 @@ def main(max, min):
             elif is_pause and num < min:
                 tn.write("engine.unpause()\n".encode('ascii'))
                 is_pause = False
-                print(tn.read_all().decode('ascii'))
                 print("engine.unpause()")
 
             time.sleep(1)
