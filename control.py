@@ -6,7 +6,7 @@ import time
 
 
 def get_wget_pros_num():
-    command = "ps aux | grep wget | grep -v grep | wc"
+    command = "ps aux | grep '/bin/sh -c wget' | grep -v grep | wc"
     num = os.popen(command, 'r', 1).read().strip().split(" ")[0]
     num = int(num)
     return num
@@ -21,7 +21,11 @@ def main(max, min):
         print("create connection successful")
         while True:
             num = get_wget_pros_num()
-            print("num = %s" % num)
+            if is_pause:
+                info = "pausing, num = %s" % num
+            else:
+                info = "running, num = %s" % num
+            print(info)
             if (not is_pause) and num > max:
                 tn.write("engine.pause()\n".encode('ascii'))
                 is_pause = True
