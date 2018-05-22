@@ -12,7 +12,7 @@ def get_wget_pros_num():
     return num
 
 
-def main():
+def main(max, min):
     HOST = "localhost"
     PORT = 6023
     is_pause = False
@@ -22,12 +22,12 @@ def main():
         while True:
             num = get_wget_pros_num()
             print("num = %s" % num)
-            if (not is_pause) and num > 20:
+            if (not is_pause) and num > max:
                 tn.write("engine.pause()\n".encode('ascii'))
                 is_pause = True
                 print("engine.pause()")
 
-            elif is_pause and num < 5:
+            elif is_pause and num < min:
                 tn.write("engine.unpause()\n".encode('ascii'))
                 is_pause = False
                 print(tn.read_all().decode('ascii'))
@@ -39,4 +39,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main(20, 5)
