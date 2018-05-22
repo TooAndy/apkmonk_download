@@ -1,7 +1,9 @@
 # 简介
-开始只是想用scrapy简单的下载apkmonk上的apk文件, 但是经过测试,发现通过scrapy自带的下载器或者通过自定义中间件的方法都不能获得满速下载(速度非常鸡肋),因此考虑使用系统自带的wget下载, 因此scrapy在这里就仅仅获取到apk的真实url, 并把url放到redis队列中(使用redis并不是为了分布式), 然后单独写了一个python脚本从redis队列中获取apk链接, 并异步调用wget进行下载.
+开始只是想用scrapy简单下载 [apkmonk](https://www.apkmonk.com/) 上的apk文件, 但是经过测试,发现通过scrapy自带的下载器或者通过自定义中间件的方法都不能获得满速下载(速度非常鸡肋),因此考虑使用系统自带的wget下载
 
-最后, 由于时间有限(能力太渣), 发现scrapy经常爬取速度快了以后, wget跟不上, 导致出现了太多的wget进程, 因此最后又写了一个控制脚本control.py, 对scrapy进行暂停(pause)和恢复(unpause)操作
+scrapy在这里仅仅获取apk的真实url, 并把url放到redis队列中(使用redis并不是为了分布式), 然后单独写了一个python脚本从redis队列中获取apk链接, 并调用wget进行多进程下载.
+
+最后, 由于时间有限(能力太渣), 发现scrapy经常爬取速度快了以后, wget跟不上, 导致出现了太多的wget进程, 因此最后又写了一个控制脚本control.py, 根据wget的进程数量对scrapy进行暂停(pause)和恢复(unpause)操作
 
 # 用法
 ### 1. 安装所需要的Python包
