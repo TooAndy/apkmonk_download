@@ -24,7 +24,14 @@ def is_spider_alive(spider=""):
     return int(status) >= 1
 
 
-def main(max, min):
+def main(max, min, seconds):
+    """
+    Main function to check wget process number and to pause or unpause the scrapy engine
+    :param max: the maximum wget process number, if the process number larger than max, the spider engine will be paused
+    :param min: the minimum wget process number, if the process number smaller than min, the spider engine will be unpaused
+    :param seconds: the time to refresh (or sleep)
+    :return:
+    """
     HOST = "localhost"
     PORT = 6023
     is_pause = False
@@ -48,10 +55,10 @@ def main(max, min):
                 is_pause = False
                 print("engine.unpause()")
 
-            time.sleep(1)
+            time.sleep(seconds)
     except Exception as e:
         print(e, "\n\n----Please start scrapy first----\n")
 
 
 if __name__ == '__main__':
-    main(20, 5)
+    main(20, 5, 1)
