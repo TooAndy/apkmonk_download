@@ -1,14 +1,7 @@
 # -*- coding: utf-8 -*-
-import logging
 import telnetlib
 import os
 
-# HOST = "localhost"
-# PORT = 6023
-# pause = "engine.pause()"
-# unpause = "engine.unpause()"
-# tn = telnetlib.Telnet(host=HOST, port=PORT)
-# tn.write('%s\n' % unpause)
 import time
 
 
@@ -18,15 +11,6 @@ def get_wget_pros_num():
     num = int(num)
     return num
 
-
-# def is_scrapy_alive():
-#     command = "ps aux | grep scrapy | grep -v grep"
-#     result = os.popen(command, 'r', 1).read()
-#     code = False
-#     if "bin/scrapy crawl" in result:
-#         code = True
-#
-#     print(code)
 
 def main():
     HOST = "localhost"
@@ -55,7 +39,4 @@ def main():
 
 
 if __name__ == '__main__':
-    # print(get_wget_pros_num())
-    # tn = telnetlib.Telnet(host=HOST, port=PORT)
     main()
-    # is_scrapy_alive()
