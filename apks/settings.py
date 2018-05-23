@@ -73,7 +73,7 @@ ITEM_PIPELINES = {
 }
 
 RETRY_HTTP_CODES = [500, 502, 503, 504, 522, 524, 408, 403, 404, 400]
-RETRY_TIMES = 5
+RETRY_TIMES = 3
 
 # FILES_STORE = "download_apks"  # download directory
 # DOWNLOAD_MAXSIZE = 10000000000  # MaxSize of file

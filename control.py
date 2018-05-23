@@ -61,4 +61,4 @@ def main(max, min, seconds):
 
 
 if __name__ == '__main__':
-    main(20, 5, 1)
+    main(20, 7, 1)
