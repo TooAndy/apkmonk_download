@@ -1,3 +1,8 @@
+imgs
+*.json
+*.tar.gz
+.idea/*
+common
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

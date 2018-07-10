@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Define here the models for your spider middleware
 #
 # See documentation in:
@@ -10,7 +9,6 @@ from scrapy.downloadermiddlewares.retry import RetryMiddleware
 from scrapy.http import HtmlResponse
 from scrapy.utils.response import response_status_message
 
-from utils.proxy import delete_proxy, get_proxy
 
 
 class ApksSpiderMiddleware(object):
@@ -130,7 +128,6 @@ class MyRetryMiddleware(RetryMiddleware):
     def delete_proxy(self, request):
         try:
             proxy = request.meta['proxy'].replace("http://", "")
-            delete_proxy(proxy)
             self.logger.info("删除无用代理： %s" % request.meta['proxy'])
             # print("删除无用代理：", request.meta['proxy'])
         except Exception as e:

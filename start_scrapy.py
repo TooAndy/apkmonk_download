@@ -19,7 +19,7 @@ def name(name):
 
 
 if __name__ == '__main__':
-    execute("scrapy crawl apkmonk".split(" "))
+    execute("scrapy crawl google".split(" "))
     # redis_push("com.axlebolt.standoff2", 'https://www.apkmonk.com/download-app/com.sanandreas.autotheft')
 
     # value = 'https://www.apkmonk.com/download-app/com.sanandreas.autotheft.' \

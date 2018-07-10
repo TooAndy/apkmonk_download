@@ -10,7 +10,7 @@
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 
-BOT_NAME = 'apks'
+BOT_NAME = 'google'
 
 SPIDER_MODULES = ['apks.spiders']
 NEWSPIDER_MODULE = 'apks.spiders'
@@ -22,12 +22,12 @@ NEWSPIDER_MODULE = 'apks.spiders'
 ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 10
+CONCURRENT_REQUESTS = 32
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 3.5
+DOWNLOAD_DELAY = 0.5
 # The download delay setting will honor only one of:
 # CONCURRENT_REQUESTS_PER_DOMAIN = 16
 # CONCURRENT_REQUESTS_PER_IP = 16
@@ -55,7 +55,7 @@ DEFAULT_REQUEST_HEADERS = {
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
-    'scrapy_fake_useragent.middleware.RandomUserAgentMiddleware': 100,
+    # 'scrapy_fake_useragent.middleware.RandomUserAgentMiddleware': 100,
 }
 
 # Enable or disable extensions
@@ -67,14 +67,15 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'apks.pipelines.JsonWriterPipeline': 1,
+    'apks.pipelines.JsonWriterPipeline': 3,
     # 'scrapy.pipelines.files.FilesPipeline': 1
     # 'apks.pipelines.CustomPipeline': 2,
+    'apks.pipelines.CustomPipeline': 2,
 }
 
-RETRY_HTTP_CODES = [500, 502, 503, 504, 522, 524, 408, 403, 404, 400]
-RETRY_TIMES = 3
-
+RETRY_HTTP_CODES = [500, 502, 503, 504, 522, 524, 408, 403, 400]
+RETRY_TIMES = 2
+IMAGES_STORE = "imgs"
 # FILES_STORE = "download_apks"  # download directory
 # DOWNLOAD_MAXSIZE = 10000000000  # MaxSize of file
 # DOWNLOAD_WARNSIZE = 200000000  # WarnSize of file
