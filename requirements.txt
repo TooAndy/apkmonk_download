@@ -22,7 +22,7 @@ pyOpenSSL==18.0.0
 queuelib==1.5.0
 redis==2.10.6
 requests==2.18.4
-Scrapy==1.5.0
+Scrapy==1.8.2
 scrapy-fake-useragent==1.1.0
 selenium==3.12.0
 service-identity==17.0.0
